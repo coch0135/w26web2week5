@@ -167,6 +167,8 @@ if using 3D transitions, positive means towards the viewer, negative means away 
 	width:80%;
 	/* text-align will center images as well as text */
 	text-align:center;
+	/* set the overflow of the slider to hidden, so any content outside its fixed width and height will be hidden  */
+	overflow: hidden;
 }
 
 /* first, make the slider position relative so it will contain all the absolutely positioned images */
@@ -189,8 +191,25 @@ if using 3D transitions, positive means towards the viewer, negative means away 
 	height: 100%; /*only works  because of display:flex*/
 	display: flex; /*so the images sit next to each other*/
 
-	background-color: lightgray;
+	/* add the transition property to animate any change (in this case, when the margin-left changes */
+	transition: margin 1s ease-in-out;
 }
+
+.imgslide{
+	/* these divs hold each of the images, and we can use flex-grow to make them take up more space */
+	flex-grow: 1;
+	height: 100%;
+}
+
+.imgslide img{ /*just to push the images down where we want them*/
+	margin-top: 26%;
+	width: 26%;
+}
+
+/* ~ is the after selector, and will style elements based on ofthey come after another element (in this case, s tyling the slider based on if it comes after a checked radio button */
+#slide1:checked ~ .slideback .slideholder{margin-left: 0;}
+#slide2:checked ~ .slideback .slideholder{margin-left: -100%;}
+#slide3:checked ~ .slideback .slideholder{margin-left: -200%;}
 
 /******************************************
 		Labels (buttons)
